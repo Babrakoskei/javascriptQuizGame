@@ -1,4 +1,84 @@
+window.onload = function () {
+  
+  var seconds = 00; 
+  var tens = 00; 
+  var appendTens = document.getElementById("tens")
+  var appendSeconds = document.getElementById("seconds")
+  var buttonStart = document.getElementById('button-start');
+  var buttonStop = document.getElementById('button-stop');
+  var buttonReset = document.getElementById('button-reset');
+  var Interval ;
 
+  buttonStart.onclick = function() {
+    
+     clearInterval(Interval);
+     Interval = setInterval(startTimer, 10);
+  }
+  buttonStop.onclick = function() {
+       clearInterval(Interval);
+  }
+  buttonReset.onclick = function() {
+     clearInterval(Interval);
+    tens = "00";
+  	seconds = "00";
+    appendTens.innerHTML = tens;
+  	appendSeconds.innerHTML = seconds;
+  }
+  function startTimer () {
+    tens++; 
+    
+    if(tens <= 9){
+      appendTens.innerHTML = "0" + tens;
+    }
+    
+    if (tens > 9){
+      appendTens.innerHTML = tens;
+      
+    } 
+    
+    if (tens > 99) {
+      console.log("seconds");
+      seconds++;
+      appendSeconds.innerHTML = "0" + seconds;
+      tens = 0;
+      appendTens.innerHTML = "0" + 0;
+    }
+    
+    if (seconds > 9){
+      appendSeconds.innerHTML = seconds;
+    }
+  
+  }
+  
+
+}
+
+let count = 0
+const value = document.querySelector('#value')
+const btns= document.querySelectorAll(".btn")
+btns.forEach(function(btn){
+  btn.addEventListener("click", function(e){
+    const styles = e.currentTarget.classList;
+    if(styles.contains("decrease")){
+      count--;
+    }else if(styles.contains("increase")){
+      count++;
+    }else{
+      count= 0;
+    }
+    if(count>0){
+      value.style.color= "green";
+    }
+    if(count<0){
+      value.style.color= "red"
+    }
+    if(count===0){
+      value.style.color= "black"
+    }
+    value.textContent= count;
+  })
+
+})
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
@@ -86,9 +166,6 @@ const questions = [
       { text: '13', correct: true },
       { text: '22', correct: false },
       { text: '18', correct: false},
-      
-    
-     
     ]
   },
   {
